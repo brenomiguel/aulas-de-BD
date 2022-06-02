@@ -1,0 +1,181 @@
+Microsoft Windows [versão 10.0.19043.1165]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Alunos>cd:\xampp\mysql\bin
+A sintaxe do nome do arquivo, do nome do diretório ou do rótulo do volume está incorreta.
+
+C:\Users\Alunos>cd c:\xampp\mysql\bin
+
+c:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 46
+Server version: 10.4.17-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show DATEBASE
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'DATEBASE' at line 1
+MariaDB [(none)]> show DATABASE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'DATABASE' at line 1
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| exemplo            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> use exemplo;
+Database changed
+MariaDB [exemplo]> show tables;
++-------------------+
+| Tables_in_exemplo |
++-------------------+
+| produtos          |
++-------------------+
+1 row in set (0.001 sec)
+
+MariaDB [exemplo]> select * from produtos;
++----+----------+-------+------+
+| id | nome     | valor | qtde |
++----+----------+-------+------+
+|  1 | Lápis    |  1.00 |   10 |
+|  2 | Borracha |  3.00 |   10 |
+|  3 | Caderno  | 15.00 |   10 |
++----+----------+-------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [exemplo]> select avg(valor) from produtos;
++------------+
+| avg(valor) |
++------------+
+|   6.333333 |
++------------+
+1 row in set (0.001 sec)
+
+MariaDB [exemplo]> select avg(valor) as valor_medio form produtos;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'form produtos' at line 1
+MariaDB [exemplo]> select avg(valor) as valor_medio from produto
+    -> ;
+ERROR 1146 (42S02): Table 'exemplo.produto' doesn't exist
+MariaDB [exemplo]> select avg(valor) as valor_medio from produtos;
++-------------+
+| valor_medio |
++-------------+
+|    6.333333 |
++-------------+
+1 row in set (0.001 sec)
+
+MariaDB [exemplo]> select * from produtos;
++----+----------+-------+------+
+| id | nome     | valor | qtde |
++----+----------+-------+------+
+|  1 | Lápis    |  1.00 |   10 |
+|  2 | Borracha |  3.00 |   10 |
+|  3 | Caderno  | 15.00 |   10 |
++----+----------+-------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [exemplo]> select max(valor) from produtos
+    -> ;
++------------+
+| max(valor) |
++------------+
+|      15.00 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> select * from produtos;
++----+----------+-------+------+
+| id | nome     | valor | qtde |
++----+----------+-------+------+
+|  1 | Lápis    |  1.00 |   10 |
+|  2 | Borracha |  3.00 |   10 |
+|  3 | Caderno  | 15.00 |   10 |
++----+----------+-------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [exemplo]> select * from produtos
+    -> where valor = 15;
++----+---------+-------+------+
+| id | nome    | valor | qtde |
++----+---------+-------+------+
+|  3 | Caderno | 15.00 |   10 |
++----+---------+-------+------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> select * from produtos
+    -> where valor = (
+    -> select max(valor) from produtos;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 3
+MariaDB [exemplo]> select * from produtos
+    -> where valor = (
+    -> select max(valor) from produtos);
++----+---------+-------+------+
+| id | nome    | valor | qtde |
++----+---------+-------+------+
+|  3 | Caderno | 15.00 |   10 |
++----+---------+-------+------+
+1 row in set (0.001 sec)
+
+MariaDB [exemplo]> select * from produtos:
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':' at line 1
+MariaDB [exemplo]> select * from produtos;
++----+----------+-------+------+
+| id | nome     | valor | qtde |
++----+----------+-------+------+
+|  1 | Lápis    |  1.00 |   10 |
+|  2 | Borracha |  3.00 |   10 |
+|  3 | Caderno  | 15.00 |   10 |
++----+----------+-------+------+
+3 rows in set (0.001 sec)
+
+MariaDB [exemplo]> select (valor * qtde) as total from produtos
+    -> ;
++--------+
+| total  |
++--------+
+|  10.00 |
+|  30.00 |
+| 150.00 |
++--------+
+3 rows in set (0.000 sec)
+
+MariaDB [exemplo]> select sum(valor * qtde) as total from produtos;
++--------+
+| total  |
++--------+
+| 190.00 |
++--------+
+1 row in set (0.000 sec)
+
+MariaDB [exemplo]> select * from produtos
+    -> where valor between 1 and 10;
++----+----------+-------+------+
+| id | nome     | valor | qtde |
++----+----------+-------+------+
+|  1 | Lápis    |  1.00 |   10 |
+|  2 | Borracha |  3.00 |   10 |
++----+----------+-------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [exemplo]> select * from produtos
+    -> where valor in (3,15);
++----+----------+-------+------+
+| id | nome     | valor | qtde |
++----+----------+-------+------+
+|  2 | Borracha |  3.00 |   10 |
+|  3 | Caderno  | 15.00 |   10 |
++----+----------+-------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [exemplo]>
