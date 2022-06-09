@@ -1,0 +1,19 @@
+Questões 
+1) select * from clientes;
+
+ select max(id) from clientes;
+
+2)select * from artistas;
+ select max(id) from artistas;
+
+3) select * from planos;
+
+4) select * from artistas;
+select * from artistas where nome like 'A%';
+
+5) select * from artistas;
+ select * from artistas
+    -> where gravadoras_id = 2;
+
+ 6) select * from artistas order by nome;
+
